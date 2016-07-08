@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<plasterManifest version='0.1.0'>
+    <metadata>
+        <id>Unique-Template-Pkg-Name</id>
+        <!-- For display by UI's in a menu list -->
+        <title>New Toolkit</title>
+        <!-- For display by UI's in hover help -->
+        <description>Plaster template for creating the files for a PSAppDeploy Toolkit.</description>
+        <version>0.1.0</version>
+        <tags>Toolkit, Build</tags>
+    </metadata>
+    <parameters>
+        <parameter name='ToolkitName' type='input' required='true' prompt='Enter the name of the Toolkit'/>
+        <parameter name='Version' type='input' default='1.0.0' store='text' prompt='Enter the version number for the Toolkit'/>
+        <parameter name='Vendor' type='input' prompt='Please Enter the Vendor Name'/>
+        <parameter name='Author' type='input' prompt='Enter the Author Name'/>
+        <parameter name='DeployMode' required='true' type='choice' default='1' prompt='Select Deploy Mode'>
+            <choice label='&amp;Interactive Mode'
+                    help="Sets Toolkit to Interactive Mode."
+                    value="Interactive"/>
+            <choice label='&amp;NonInteractive Mode'
+                    help="Sets Toolkit to NonInteractive Mode.."
+                    value="NonInteractive"/>
+            <choice label='&amp;Silent'
+                    help="Sets Toolkit to Silent Mode."
+                    value="Silent"/>
+        </parameter>
+    </parameters>
+    <dependencies>
+        <dependency id="another-template-id??"/>
+    </dependencies>
+    <content>
+        <!--Toolkit Files-->
+        <file source='Toolkit\**'
+              destination='Toolkit'
+              template='true'/>        
+        <!--Files Folder-->
+        <file source=''
+              destination='Toolkit\Files\'/>
+        <!--SupportFiles Folder-->
+        <file source=''
+              destination='Toolkit\SupportFiles\'/>
+    </content>
+</plasterManifest>

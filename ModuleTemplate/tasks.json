@@ -1,0 +1,45 @@
+// Available variables which can be used inside of strings.
+// ${workspaceRoot}: the root folder of the team
+// ${file}: the current opened file
+// ${fileBasename}: the current opened file's basename
+// ${fileDirname}: the current opened file's dirname
+// ${fileExtname}: the current opened file's extension
+// ${cwd}: the current working directory of the spawned process
+{
+	"version": "0.1.0",
+
+	// Start PowerShell
+	"command": "${env.windir}\\sysnative\\windowspowershell\\v1.0\\PowerShell.exe",
+
+	// The command is a shell script
+	"isShellCommand": true,
+
+	// Show the output window always
+	"showOutput": "always",
+
+    "args": [
+        "-NoProfile", "-ExecutionPolicy", "Bypass"
+    ],
+
+    // Associate with test task runner
+    "tasks": [
+        {
+            "taskName": "Analyze",
+            "suppressTaskName": true,
+            "showOutput": "always",
+            "args": [
+                "Write-Host 'Invoking PSScriptAnalyzer...'; Invoke-ScriptAnalyzer -path \"${workspaceRoot}\\<%=$PLASTER_PARAM_ModuleName%>\" -Recurse;",
+                "Invoke-Command { Write-Host 'Completed Analyze task in task runner.' }"
+            ]
+        },
+        {
+            "taskName": "Help",
+            "suppressTaskName": true,            
+            "showOutput": "always",
+            "args": [
+                "Write-Host 'Invoking New-ExternalHelp...'; New-ExternalHelp \"${workspaceRoot}\\docs\\Commands\" -OutputPath \"${workspaceRoot}\\<%=$PLASTER_PARAM_ModuleName%>\\en-US\" -Force -ErrorAction Stop;",
+                "Invoke-Command { Write-Host 'Completed Help task in task runner.' }"
+            ]
+        }
+    ]
+}

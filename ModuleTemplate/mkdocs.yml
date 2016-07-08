@@ -1,0 +1,5 @@
+site_name: <%=$PLASTER_PARAM_ModuleName%> Docs
+repo_url: 
+theme: readthedocs
+pages:
+- Home: index.md
